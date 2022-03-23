@@ -3,6 +3,7 @@ import './App.css';
 import WordList from './components/WordList';
 import InputGroup from './components/InputGroup';
 import {useState} from "react"
+import Outputs from './components/Outputs';
 
 function App() {
 
@@ -17,19 +18,21 @@ const [savedWords , setsavedWords] = useState(testwords)
               <WordList 
                   savedWords = {savedWords}/>
           </div>
+
+
           <div className="row">
               <div className="input-group col">
                   <InputGroup
                     setsavedWords = {setsavedWords}/>
-
-                    
               </div>
           </div>
+
+
           <div className="row">
               <h2 className="col" id="output_description"></h2>
           </div>
           <div className="output row">
-              <output id="word_output" className="col"></output>
+              <Outputs/>
           </div>
       </main>
   );
