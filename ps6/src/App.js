@@ -9,6 +9,8 @@ function App() {
 
 const testwords = ['a', 'b']
 const [savedWords , setsavedWords] = useState(testwords)
+const [outputList, setOutputList] = useState('')
+const [theWord, setTheWord] = useState('')
 
   return (
       <main className="container">
@@ -23,7 +25,9 @@ const [savedWords , setsavedWords] = useState(testwords)
           <div className="row">
               <div className="input-group col">
                   <InputGroup
-                    setsavedWords = {setsavedWords}/>
+                    setsavedWords = {setsavedWords}
+                    setOutputList = {setOutputList}
+                    setTheWord = {setTheWord}/>
               </div>
           </div>
 
@@ -32,7 +36,11 @@ const [savedWords , setsavedWords] = useState(testwords)
               <h2 className="col" id="output_description"></h2>
           </div>
           <div className="output row">
-              <Outputs/>
+              <Outputs
+                outputList = {outputList}
+                setsavedWords = {setsavedWords}
+                savedWords = {savedWords}
+                theWord = {theWord}/>
           </div>
       </main>
   );
