@@ -8,7 +8,7 @@ import Outputs from './components/Outputs';
 function App() {
 
 const testwords = ['a', 'b']
-const [savedWords , setsavedWords] = useState([])
+const [savedWords , setSavedWords] = useState([])
 const [outputList, setOutputList] = useState('')
 const [theWord, setTheWord] = useState('')
 const [rhymeMode, setRhymeMode] = useState('')
@@ -40,7 +40,7 @@ const [rhymeMode, setRhymeMode] = useState('')
           <div className="output row">
               <Outputs
                 outputList = {outputList}
-                setsavedWords = {setsavedWords}
+                setSavedWords = {setSavedWords}
                 savedWords = {savedWords}
                 rhymeMode = {rhymeMode}
                 theWord = {theWord}/>
