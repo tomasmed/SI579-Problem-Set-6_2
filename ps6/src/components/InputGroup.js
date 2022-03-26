@@ -47,13 +47,16 @@ function groupBy(objects, property) {
 
 const InputGroup= (props) =>{
 
-    const {setsavedWords,setOutputList,theWord,setTheWord} = props;
+    const {setOutputList,theWord,setTheWord, setRhymeMode} = props;
 
     const getRhymes = () =>{
-        console.log("getRHymes");
-        const rhymeUrl = getDatamuseRhymeUrl(theWord);
+        console.log(theWord)
+
+        console.log("getRhymes");
+        var rhymeUrl = getDatamuseRhymeUrl(theWord);
         console.log(rhymeUrl)
 
+        setRhymeMode(1);
         datamuseRequest(rhymeUrl, (resp)=>{
             setOutputList(groupBy(resp,'numSyllables'))
 
@@ -61,11 +64,12 @@ const InputGroup= (props) =>{
 
     }
 
-
     const getSynonyms = () =>{
-        setsavedWords([theWord, theWord])
-        const similarToUrl = getDatamuseSimilarToUrl(theWord);
+        console.log(theWord)
+        var similarToUrl = getDatamuseSimilarToUrl(theWord);
+        console.log(similarToUrl);
         
+        setRhymeMode(0);
         datamuseRequest(similarToUrl, (resp)=>{
             setOutputList(resp)
         })
@@ -75,11 +79,11 @@ const InputGroup= (props) =>{
     return(
         <div className="input-group col">
              <input
+                        placeholder="Enter a word"
                         type='text'
                         value={theWord}
                         onChange={(e) => setTheWord(e.target.value)}
                     />
-            <input className="form-control" type="text" placeholder="Enter a word" id="word_input"/>
             <button id="show_rhymes" type="button" onClick = {getRhymes} className="btn btn-primary">Show rhyming words</button>
             <button id="show_synonyms" type="button" onClick = {getSynonyms} className="btn btn-secondary">Show synonyms</button>
         </div>

@@ -1,53 +1,61 @@
 import './Outputs.css'
+import Synonym from './Synonym';
 
 const Outputs = (props) =>{
 
-    const {outputList,theWord,setSavedWords,savedWords} = props;
+    const {outputList,theWord,setSavedWords,rhymeMode} = props;
 
-    const addToSavedWords = (word) =>{
-        const prev = savedWords;
-        var newWords = prev.append(word);
-        console.log("The New Saved words is: " + newWords.join( ' ,'))
-        setSavedWords(newWords)
-    }
-
-
+ 
     const unpackOutputList = () => {
 
+        var inner_wordlist = []
         if (Object.keys(outputList).length === 0){
             return (
             <div> 
                 <p>(no results)</p>
             </div>)
         }
+        
+        //return it as JSX
+        if (rhymeMode === 1){
+            inner_wordlist =[]
 
-        for (const [key, value] of Object.entries(outputList)){
+            return(
+                <div>
+                    <h1>Words that rhyme with: {theWord} </h1>
 
-            //     wordOutput.innerHTML += ` <h3> Number of Syllables: ${key} <h3/> <ul>`
-            for(var i =0; i<value.length; i++){
-                if(value[i].numSyllables === key){
-                return(
-                    <div>
-                        <li class="topmargin">  {value[i].word} 
-                        <button className="btn btn-success" onClick={addToSavedWords(value[i].word)}>
-                             Save </button> </li>`
-                    </div>
-                    )   
-            }
-            
-            }
-            //     wordOutput.innerHTML += '<ul/>'
+                    {inner_wordlist}
+                </div>
+            )
         }
+        
+        else{ //Rhymemode === 0
+            outputList.forEach((elt,index) =>{
+                inner_wordlist.push(
+                    <Synonym word= {elt.word}
+                        setSavedWords={setSavedWords}
+                        index = {index}/>
+                )
+            })
 
+
+            return(
+                <div>
+                <h1>Words that are synonyms to: {theWord} </h1>
+
+                    <ul>
+                        {inner_wordlist}
+                    </ul>
+            </div>
+            )
+        }
     }
 
 
 
     return (
         <div>
-            <h1>Words that Rhyme with: {theWord} </h1>
-
-           {unpackOutputList()}
+            {unpackOutputList()}
         </div>
     )
 

@@ -8,9 +8,10 @@ import Outputs from './components/Outputs';
 function App() {
 
 const testwords = ['a', 'b']
-const [savedWords , setsavedWords] = useState(testwords)
+const [savedWords , setsavedWords] = useState([])
 const [outputList, setOutputList] = useState('')
 const [theWord, setTheWord] = useState('')
+const [rhymeMode, setRhymeMode] = useState('')
 
   return (
       <main className="container">
@@ -25,9 +26,10 @@ const [theWord, setTheWord] = useState('')
           <div className="row">
               <div className="input-group col">
                   <InputGroup
-                    setsavedWords = {setsavedWords}
                     setOutputList = {setOutputList}
-                    setTheWord = {setTheWord}/>
+                    setTheWord = {setTheWord}
+                    setRhymeMode = {setRhymeMode}                    
+                    theWord = {theWord}/>
               </div>
           </div>
 
@@ -40,6 +42,7 @@ const [theWord, setTheWord] = useState('')
                 outputList = {outputList}
                 setsavedWords = {setsavedWords}
                 savedWords = {savedWords}
+                rhymeMode = {rhymeMode}
                 theWord = {theWord}/>
           </div>
       </main>
