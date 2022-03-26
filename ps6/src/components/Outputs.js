@@ -1,5 +1,6 @@
 import './Outputs.css'
 import Synonym from './Synonym';
+import RhymeElement from './RhymeElement';
 
 const Outputs = (props) =>{
 
@@ -18,18 +19,24 @@ const Outputs = (props) =>{
         
         //return it as JSX
         if (rhymeMode === 1){
-            inner_wordlist =[]
+            inner_wordlist =[];
+            for (const [key, value] of Object.entries(outputList)){
 
+                inner_wordlist.push(<RhymeElement
+                    numSyllables = {key}
+                    setSavedWords = {setSavedWords}
+                    elts = {value}/>)
+            }
             return(
                 <div>
                     <h1>Words that rhyme with: {theWord} </h1>
-
                     {inner_wordlist}
                 </div>
             )
         }
         
         else{ //Rhymemode === 0
+            inner_wordlist =[];
             outputList.forEach((elt,index) =>{
                 inner_wordlist.push(
                     <Synonym word= {elt.word}
@@ -38,19 +45,14 @@ const Outputs = (props) =>{
                 )
             })
 
-
             return(
                 <div>
                 <h1>Words that are synonyms to: {theWord} </h1>
-
-                    <ul>
-                        {inner_wordlist}
-                    </ul>
+                    <ul>{inner_wordlist}</ul>
             </div>
             )
         }
     }
-
 
 
     return (

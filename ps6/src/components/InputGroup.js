@@ -49,13 +49,15 @@ const InputGroup= (props) =>{
 
     const {setOutputList,theWord,setTheWord, setRhymeMode} = props;
 
+    const keyDownHandler = (e) =>{
+        if (e.keyCode == 13){
+            getRhymes()
+        }
+    }
+
     const getRhymes = () =>{
-        console.log(theWord)
-
-        console.log("getRhymes");
+        setOutputList([])
         var rhymeUrl = getDatamuseRhymeUrl(theWord);
-        console.log(rhymeUrl)
-
         setRhymeMode(1);
         datamuseRequest(rhymeUrl, (resp)=>{
             setOutputList(groupBy(resp,'numSyllables'))
@@ -65,10 +67,8 @@ const InputGroup= (props) =>{
     }
 
     const getSynonyms = () =>{
-        console.log(theWord)
+        setOutputList([])
         var similarToUrl = getDatamuseSimilarToUrl(theWord);
-        console.log(similarToUrl);
-        
         setRhymeMode(0);
         datamuseRequest(similarToUrl, (resp)=>{
             setOutputList(resp)
@@ -83,9 +83,10 @@ const InputGroup= (props) =>{
                         type='text'
                         value={theWord}
                         onChange={(e) => setTheWord(e.target.value)}
+                        onKeyDown={(e) => keyDownHandler(e)}
                     />
-            <button id="show_rhymes" type="button" onClick = {getRhymes} className="btn btn-primary">Show rhyming words</button>
-            <button id="show_synonyms" type="button" onClick = {getSynonyms} className="btn btn-secondary">Show synonyms</button>
+            <button id="show_rhymes" type="button" onClick = {getRhymes} className="bluebtn">Show rhyming words</button>
+            <button id="show_synonyms" type="button" onClick = {getSynonyms} className="graybtn">Show synonyms</button>
         </div>
     )
 

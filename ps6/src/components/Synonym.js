@@ -11,13 +11,13 @@ const Synonym = (props) =>{
             return [...previous, word];
         });
 
-        //setSavedWords([...savedWords,word]);
+        
 
     }
 
     return(
        <li key={index}> 
-            {word} <button className="btn btn-success" onClick={savedWordsHandler}> Save </button> 
+            {word} <button className="green-button" onClick={savedWordsHandler}> Save </button> 
        </li>
     )
 }
