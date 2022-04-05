@@ -47,7 +47,7 @@ function groupBy(objects, property) {
 
 const InputGroup= (props) =>{
 
-    const {setOutputList,theWord,setTheWord, setRhymeMode} = props;
+    const {setOutputList,theWord,setTheWord, setRhymeMode, setDisplayWord,setLoading} = props;
 
     const keyDownHandler = (e) =>{
         if (e.keyCode == 13){
@@ -57,10 +57,13 @@ const InputGroup= (props) =>{
 
     const getRhymes = () =>{
         setOutputList([])
+        setLoading(true)
+        setDisplayWord(theWord)
         var rhymeUrl = getDatamuseRhymeUrl(theWord);
         setRhymeMode(1);
         datamuseRequest(rhymeUrl, (resp)=>{
             setOutputList(groupBy(resp,'numSyllables'))
+            setLoading(false)
 
         })
 
@@ -68,10 +71,13 @@ const InputGroup= (props) =>{
 
     const getSynonyms = () =>{
         setOutputList([])
+        setLoading(true)
+        setDisplayWord(theWord)
         var similarToUrl = getDatamuseSimilarToUrl(theWord);
         setRhymeMode(0);
         datamuseRequest(similarToUrl, (resp)=>{
             setOutputList(resp)
+            setLoading(false)
         })
 
     }

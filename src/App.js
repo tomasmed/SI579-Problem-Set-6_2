@@ -12,6 +12,8 @@ const [savedWords , setSavedWords] = useState([])
 const [outputList, setOutputList] = useState('')
 const [theWord, setTheWord] = useState('')
 const [rhymeMode, setRhymeMode] = useState('')
+const [displayword, setDisplayWord] = useState('')
+const [loading, setLoading] = useState(false)
 
   return (
       <main className="container">
@@ -26,9 +28,11 @@ const [rhymeMode, setRhymeMode] = useState('')
           <div className="row">
               <div className="input-group col">
                   <InputGroup
+                    setLoading = {setLoading}
                     setOutputList = {setOutputList}
                     setTheWord = {setTheWord}
-                    setRhymeMode = {setRhymeMode}                    
+                    setRhymeMode = {setRhymeMode}   
+                    setDisplayWord = {setDisplayWord}                 
                     theWord = {theWord}/>
               </div>
           </div>
@@ -43,7 +47,8 @@ const [rhymeMode, setRhymeMode] = useState('')
                 setSavedWords = {setSavedWords}
                 savedWords = {savedWords}
                 rhymeMode = {rhymeMode}
-                theWord = {theWord}/>
+                displayword = {displayword}
+                loading = {loading}/>
           </div>
       </main>
   );

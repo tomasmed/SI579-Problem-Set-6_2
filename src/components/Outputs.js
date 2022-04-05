@@ -4,7 +4,7 @@ import RhymeElement from './RhymeElement';
 
 const Outputs = (props) =>{
 
-    const {outputList,theWord,setSavedWords,rhymeMode} = props;
+    const {outputList,displayword,setSavedWords,rhymeMode,loading} = props;
 
  
     const unpackOutputList = () => {
@@ -29,7 +29,7 @@ const Outputs = (props) =>{
             }
             return(
                 <div>
-                    <h1>Words that rhyme with: {theWord} </h1>
+                    <h1>Words that rhyme with: {displayword} </h1>
                     {inner_wordlist}
                 </div>
             )
@@ -47,7 +47,7 @@ const Outputs = (props) =>{
 
             return(
                 <div>
-                <h1>Words that are synonyms to: {theWord} </h1>
+                <h1>Words that are synonyms to: {displayword} </h1>
                     <ul>{inner_wordlist}</ul>
             </div>
             )
@@ -57,7 +57,7 @@ const Outputs = (props) =>{
 
     return (
         <div>
-            {unpackOutputList()}
+            {loading?"Loading....":unpackOutputList()}
         </div>
     )
 
